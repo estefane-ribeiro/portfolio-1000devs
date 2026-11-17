@@ -1,0 +1,881 @@
+:root {
+  --background:
+    radial-gradient(
+      ellipse at center,
+      #fff7fa 20%,
+      rgba(255, 247, 250, 0.9) 40%,
+      rgba(235, 168, 194, 0.45) 75%,
+      rgba(217, 107, 154, 0.35) 100%
+    ),
+    #fff7fa;
+  --surface: #f9e8ef;
+  --primary: #d96b9a;
+  --secondary: #eba8c2;
+  --accent: #b94d7b;
+  --text: #38232d;
+  --text-muted: #795968;
+}
+
+body.dark-mode {
+  --background:
+    radial-gradient(
+      ellipse at 15% 10%,
+      rgba(190, 65, 120, 0.35),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 85% 80%,
+      rgba(115, 55, 110, 0.3),
+      transparent 40%
+    ),
+    #211820;
+  --surface: #30232d;
+  --primary: #e783ad;
+  --secondary: #c77d9e;
+  --accent: #f3a5c4;
+  --text: #fceaf2;
+  --text-muted: #d5b9c7;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+header {
+  position: relative;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 20px;
+  align-items: center;
+  position: sticky;
+  top: 0px;
+}
+
+.container {
+  max-width: 1400px;
+  width: 90%;
+  margin: auto;
+}
+
+#header.mobile .header {
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  z-index: 10;
+  background: color-mix(in srgb, var(--secondary) 70%, transparent);
+  gap: 10rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#header.mobile .header.container {
+  margin: 0;
+}
+
+#header.mobile .header a {
+  color: var(--text);
+}
+
+#header.mobile .header a:hover .line {
+  background: var(--text);
+}
+
+header.mobile nav {
+  width: 100%;
+}
+header.mobile nav ul {
+  flex-direction: column;
+  z-index: 100;
+  height: 50vh;
+  width: 100%;
+  gap: 2rem;
+}
+
+.logo {
+  background: linear-gradient(90deg, var(--text), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  z-index: 5;
+}
+
+/* .logo span {
+  color: var(--surface);
+} */
+
+.header nav ul {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  z-index: 5;
+}
+
+.header nav ul a {
+  display: block;
+  color: var(--primary);
+  padding: 5px 10px;
+}
+
+.header nav ul.mobile {
+  flex-direction: column;
+}
+
+.header nav ul a:hover {
+  color: var(--accent);
+}
+
+.header nav ul li .line {
+  margin-top: 2px;
+  height: 2px;
+  width: 5px;
+  background: var(--accent);
+  display: block;
+  opacity: 0;
+  transition: width 0.3s ease;
+}
+
+.header nav ul a:hover + span {
+  width: 100%;
+  opacity: 1;
+}
+
+button.mobile {
+  display: none;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  right: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.mobile.active {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+button.active:hover {
+  color: var(--primary);
+}
+
+button#modo-dark {
+  background: var(--primary);
+  padding: 1.5px;
+  width: 50px;
+  border-radius: 15px;
+  border: 2px solid var(--surface);
+  display: flex;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button#modo-dark.active {
+  justify-content: end;
+}
+
+button#modo-dark span {
+  background: var(--surface);
+  border-radius: 50px;
+  padding: 1px;
+}
+
+section.hero {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  height: 94vh;
+}
+
+section.hero div {
+  max-width: 500px;
+  width: 60%;
+}
+
+section.hero div img {
+  width: 100%;
+}
+
+section.hero .hero-info {
+  display: grid;
+  gap: 1rem;
+  font-size: 18px;
+}
+
+section.hero .hero-info h2 {
+  font-size: clamp(2rem, 7vw, 4rem);
+  background: linear-gradient(40deg, var(--text), var(--primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+section.hero .hero-info h2 + p {
+  color: var(--primary);
+  font-size: clamp(1.2rem, 2rem, 4rem);
+  font-weight: bold;
+}
+
+section.hero .hero-info p.hero-open {
+  display: flex;
+  padding: 2px 15px;
+  border: 1.2px solid var(--primary);
+  border-radius: 999px;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  font-size: 16px;
+  justify-self: flex-start;
+}
+
+section.hero .hero-info p.hero-open span.circle {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 10px;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 60%, transparent);
+  transition: all 0.7s;
+  animation: pulsar 2s infinite;
+  margin-right: 3px;
+}
+
+.tag {
+  background: color-mix(in srgb, var(--secondary) 30%, transparent);
+  padding: 4px 6px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  justify-self: flex-start;
+}
+
+section#sobre {
+  min-height: 100vh;
+  background: var(--secondary);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+body.dark-mode section#contato,
+body.dark-mode section#sobre {
+  background: transparent;
+}
+
+section#sobre .about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 30px;
+  padding-block: 30px;
+}
+
+section#sobre .about .about-info {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  color: var(--text);
+}
+
+section#sobre .about .highlight-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr);
+  grid-template-areas:
+    "item1 item1"
+    "item2 item3"
+    "item4 item4";
+  gap: 10px;
+}
+
+section#sobre .about .highlight-list .lighlight-item {
+  background: var(--text-muted);
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: all 0.5s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+section#sobre .about .highlight-list .lighlight-item .tag {
+  background: none;
+  border: none;
+}
+
+section#sobre .about .highlight-list .lighlight-item.item1 {
+  grid-area: item1;
+  font-size: 25px;
+  border-left: 3px solid var(--accent);
+}
+
+section#sobre .about .highlight-list .lighlight-item.item1 span {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+section#sobre .about .highlight-list .lighlight-item.item {
+  grid-area: item4;
+}
+
+section#sobre .about .highlight-list .lighlight-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+}
+
+section#sobre .about .about-info h2 {
+  font-size: clamp(2rem, 7vw, 4rem);
+  background: linear-gradient(40deg, var(--text), var(--primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+section#habilidades {
+  padding: 50px 0;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+}
+
+section#habilidades .container-infinite {
+  overflow: hidden;
+}
+
+section h2 {
+  font-size: clamp(2rem, 7vw, 4rem);
+  background: linear-gradient(40deg, var(--text), var(--primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  width: 80%;
+}
+
+section#habilidades .stackList {
+  border-block: 2px solid var(--primary);
+  margin-block: 25px;
+  max-height: 400px;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  padding-block: 10px;
+  overflow: hidden !important;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--primary) 10%,
+    var(--primary) 90%,
+    transparent 100%
+  );
+}
+
+section#habilidades .stackList div {
+  height: 100%;
+  animation: rolar 15s linear infinite;
+  transition: all 0.3s;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.stackList div:hover {
+  animation-play-state: paused !important;
+}
+
+.stackList div span img {
+  width: 64px;
+  height: 100%;
+  fill: var(--primary);
+}
+
+section#habilidades .stacks {
+  display: flex;
+  gap: 30px;
+  place-content: center;
+  width: 80%;
+  margin: 30px auto;
+  flex-wrap: wrap;
+}
+
+.stacks .stack {
+  position: relative;
+}
+
+.stack div {
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  color: var(--primary);
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.7s;
+  min-width: 106px;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+.stack div img {
+  width: 64px;
+}
+
+.stack div:hover {
+  /* border: 2px solid var(--accent);
+  color: var(--accent); */
+  filter: contrast(2);
+  transform: translateY(-5px);
+}
+
+.stack span {
+  display: none;
+  position: absolute;
+  width: 200px;
+  left: -50px;
+  background: var(--accent);
+  padding: 4px;
+  border-radius: 10px;
+  transition: display 2s;
+  border: 2px solid var(--surface);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+  z-index: 5;
+}
+
+.stack:hover span {
+  display: block;
+  transform: translateY(20px);
+}
+
+#projetos {
+  padding-block: 30px;
+  text-align: center;
+}
+
+.project-container {
+  display: grid;
+  gap: 30px;
+  padding-block: 30px;
+  grid-template-columns: repeat(3, minmax(0, 400px));
+}
+
+.projeto {
+  display: flex;
+  /* width: 400px; */
+  flex-direction: column;
+  gap: 15px;
+  background: var(--text-muted);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: all 0.7s;
+  overflow: hidden;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+.projeto:hover {
+  border-color: var(--surface);
+  transform: translateY(-5px);
+}
+
+.projeto .image-project {
+  border-radius: 10px;
+  filter: grayscale(10);
+  object-fit: cover;
+  transition: all 0.7s;
+  width: 100%;
+  height: 200px;
+  max-width: 100%;
+}
+
+.projeto:hover .image-project {
+  filter: grayscale(0);
+}
+
+.projeto:hover .image-project:hover {
+  transform: scale(1.1);
+}
+
+.projeto-info {
+  padding: 10px 20px;
+  display: grid;
+  gap: 15px;
+  color: var(--surface);
+}
+
+.techs img {
+  width: 24px;
+}
+
+.projeto nav a {
+  color: var(--primary);
+  padding: 5px 10px;
+  border: 1px solid var(--primary);
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.projeto nav a:hover {
+  filter: contrast(2);
+}
+
+#contato {
+  background: var(--secondary);
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+  text-align: center;
+}
+
+#contato div {
+  display: grid;
+  gap: 30px;
+  place-items: center;
+}
+
+#contato div .tag {
+  justify-self: center;
+}
+
+#contato div p {
+  font-size: clamp(14px, 18px, 24px);
+}
+
+#contato div button {
+  background: linear-gradient(40deg, var(--text), var(--primary));
+  padding: 10px 20px;
+  border-radius: 999px;
+  color: var(--surface);
+  border: 2px solid var(--surface);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#contato div button:hover {
+  filter: contrast(1.3);
+}
+
+#contato .contatos {
+  display: flex;
+}
+
+#contato .contatos a {
+  display: grid;
+  gap: 10px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  color: var(--primary);
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.7s;
+  min-width: 85px;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+.contatos a:hover {
+  /* border: 2px solid var(--accent);
+  color: var(--accent); */
+  filter: contrast(2);
+  transform: translateY(-5px);
+}
+
+.contatos svg {
+  height: 32px;
+  fill: var(--primary);
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+footer h1.logo {
+  font-size: 20px;
+}
+
+.top {
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  background: color-mix(in srgb, var(--primary) 70%, transparent);
+  border-radius: 10px;
+  padding: 5px 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+.top.active {
+  display: block;
+}
+
+.top:hover {
+  background: var(--primary);
+  transform: translateY(-5px);
+}
+button.addProject,
+button.addStack {
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+button.addProject:hover,
+button.addStack:hover {
+  filter: contrast(1.2);
+
+  transform: translateY(-5px);
+}
+
+.modal-projetos,
+.modal-habilidade {
+  background: color-mix(in srgb, var(--primary) 60%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  place-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.modal-projetos.active,
+.modal-habilidade.active {
+  display: flex;
+}
+
+.modal-projetos form fieldset,
+.modal-habilidade form fieldset {
+  position: relative;
+  display: grid;
+  gap: 20px;
+  background: var(--surface);
+  padding: 50px 100px;
+  border-radius: 10px;
+  border: 2px solid var(--accent);
+  box-shadow: 1px 8px 15px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.modal-projetos form fieldset .closed,
+.modal-habilidade form fieldset .closed {
+  position: absolute;
+  top: -12px;
+  right: -2px;
+  border-radius: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: var(--text);
+}
+
+.modal-projetos form fieldset div,
+.modal-habilidade form fieldset div {
+  display: grid;
+  gap: 5px;
+}
+
+.modal-projetos form fieldset textarea,
+.modal-projetos form fieldset input,
+.modal-habilidade form fieldset textarea,
+.modal-habilidade form fieldset input {
+  padding: 8px;
+  border: 2px solid var(--secondary);
+  border-radius: 8px;
+  outline: none;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.modal-projetos form fieldset input:focus,
+.modal-habilidade form fieldset input:focus {
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+.modal-projetos form fieldset input[type="file"]::file-selector-button,
+.modal-habilidade form fieldset input[type="file"]::file-selector-button {
+  border-radius: 8px;
+  padding: 5px;
+  border: 2px solid color-mix(in srgb, var(--primary) 60%, transparent);
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  color: var(--primary);
+}
+
+.modal-projetos form fieldset legend,
+.modal-habilidade form fieldset legend {
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.modal-projetos form fieldset button,
+.modal-habilidade form fieldset button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid var(--primary);
+  background: var(--primary);
+  color: var(--surface);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-projetos form fieldset button:hover,
+.modal-habilidade form fieldset button:hover {
+  filter: contrast(1.2);
+  transform: translateY(-3px);
+}
+
+.modal-projetos form fieldset .closed:hover,
+.modal-habilidade form fieldset .closed:hover {
+  background: var(--primary);
+  transform: none;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 60%, transparent);
+}
+
+button.btn-fechar,
+.modal-projetos form fieldset button[type="button"] {
+  justify-self: left;
+  font-size: 14px;
+  width: 151px;
+}
+
+@media (max-width: 870px) {
+  .logo {
+    font-size: clamp(20px, 1.5rem, 2vw);
+  }
+  header nav ul {
+    gap: 0.3rem;
+  }
+  .project-container {
+    grid-template-columns: repeat(2, minmax(0, 400px));
+  }
+}
+
+@media (max-width: 700px) {
+  .header nav {
+    display: none;
+  }
+  #header.mobile nav {
+    display: block;
+  }
+  #header.mobile a {
+    font-weight: bold;
+  }
+  button.mobile {
+    display: block;
+  }
+  section.hero {
+    flex-direction: column;
+    justify-content: center;
+  }
+  section.hero .hero-info {
+    text-align: center;
+    gap: 8px;
+  }
+  section.hero .hero-info p.hero-open {
+    justify-self: center;
+  }
+  section#sobre .about {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 550px) {
+  .project-container {
+    grid-template-columns: minmax(0, 400px);
+    justify-content: center;
+  }
+  footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  #projetos.container {
+    text-align: center;
+  }
+  #projetos.container .tag,
+  h2 {
+    justify-self: center;
+    text-align: center;
+  }
+
+  .modal-projetos form fieldset,
+  .modal-habilidade form fieldset {
+    max-width: 530px;
+    padding-inline: 20px;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+}
+
+@keyframes pulsar {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 70%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 0%, transparent);
+  }
+}
+
+@keyframes rolar {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
